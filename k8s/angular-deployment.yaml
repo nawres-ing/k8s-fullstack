@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: angular-deployment
+  name: angular-deployment
+  namespace: k8s-fullstack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: angular-deployment
+    spec:
+      containers:
+      - image: nawresm/angular-app:3.0
+        name: angular-app
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
