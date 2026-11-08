@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-deployment
+  name: spring-deployment
+  namespace: k8s-fullstack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-deployment
+    spec:
+      containers:
+      - image: nawresm/spring-app:3.0
+        name: spring-app
+        ports:
+        - containerPort: 8081
+        resources: {}
+status: {}
