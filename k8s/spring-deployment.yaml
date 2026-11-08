@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: spring-deployment
   name: spring-deployment
@@ -11,17 +10,27 @@ spec:
   selector:
     matchLabels:
       app: spring-deployment
-  strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: spring-deployment
     spec:
       containers:
-      - image: nawresm/spring-app:3.1
+      - image: nawresm/spring-app:3.2
         name: spring-app
         ports:
         - containerPort: 8081
-        resources: {}
-status: {}
+        envFrom:
+        - configMapRef:
+            name: app-config
+        env:
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: password

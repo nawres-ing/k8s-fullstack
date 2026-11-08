@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: mysql-deployment
   name: mysql-deployment
@@ -11,10 +10,8 @@ spec:
   selector:
     matchLabels:
       app: mysql-deployment
-  strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: mysql-deployment
     spec:
@@ -24,8 +21,13 @@ spec:
         ports:
         - containerPort: 3306
         env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: "root"
         - name: MYSQL_DATABASE
-          value: "demo"
-status: {}
+          valueFrom:
+            configMapKeyRef:
+               name: app-config
+               key: MYSQL_DATABASE
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: password
