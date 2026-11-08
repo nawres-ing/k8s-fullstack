@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: angular-deployment
   name: angular-deployment
@@ -11,17 +10,21 @@ spec:
   selector:
     matchLabels:
       app: angular-deployment
-  strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: angular-deployment
     spec:
       containers:
-      - image: nawresm/angular-app:3.1
+      - image: nawresm/angular-app:3.2
         name: angular-app
         ports:
         - containerPort: 80
-        resources: {}
-status: {}
+        volumeMounts:
+        - name: frontend-config
+          mountPath: /usr/share/nginx/html/config.js
+          subPath: config.js
+      volumes:
+      - name: frontend-config
+        configMap:
+          name: frontend-config

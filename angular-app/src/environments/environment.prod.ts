@@ -1,5 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://192.168.44.128:30081'
-
+  apiUrl: (window as any).APP_CONFIG?.apiUrl ?? 'http://localhost:8081'
 };
