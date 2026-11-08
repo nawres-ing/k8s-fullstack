@@ -1,7 +1,4 @@
-export const environment :
-{
-  production?:boolean,
-}
-= {
-    production: false,
-  };
+export const environment = {
+  production: false,
+  apiUrl: 'http://192.168.44.128:30081'
+};

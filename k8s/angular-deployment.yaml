@@ -19,7 +19,7 @@ spec:
         app: angular-deployment
     spec:
       containers:
-      - image: nawresm/angular-app:3.0
+      - image: nawresm/angular-app:3.1
         name: angular-app
         ports:
         - containerPort: 80
